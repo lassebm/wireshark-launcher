@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>en</string>
+    <key>CFBundleExecutable</key>
+    <string>WiresharkLauncher</string>
+    <key>CFBundleIconFile</key>
+    <string>AppIcon</string>
+    <key>CFBundleIdentifier</key>
+    <string>com.local.WiresharkLauncher</string>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>CFBundleName</key>
+    <string>Wireshark Launcher</string>
+    <key>CFBundleDisplayName</key>
+    <string>Wireshark Launcher</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleShortVersionString</key>
+    <string>1.0</string>
+    <key>CFBundleVersion</key>
+    <string>1</string>
+    <key>LSMinimumSystemVersion</key>
+    <string>12.0</string>
+    <key>LSUIElement</key>
+    <false/>
+    <key>NSHighResolutionCapable</key>
+    <true/>
+    <key>CFBundleDocumentTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleTypeName</key>
+            <string>Pcap Network Capture</string>
+            <key>CFBundleTypeRole</key>
+            <string>Viewer</string>
+            <key>CFBundleTypeExtensions</key>
+            <array>
+                <string>pcap</string>
+                <string>pcap.gz</string>
+            </array>
+            <key>CFBundleTypeIconFile</key>
+            <string>AppIcon</string>
+            <key>LSHandlerRank</key>
+            <string>Alternate</string>
+        </dict>
+        <dict>
+            <key>CFBundleTypeName</key>
+            <string>Pcapng Network Capture</string>
+            <key>CFBundleTypeRole</key>
+            <string>Viewer</string>
+            <key>CFBundleTypeExtensions</key>
+            <array>
+                <string>pcapng</string>
+                <string>ntar</string>
+                <string>pcapng.gz</string>
+                <string>ntar.gz</string>
+                <string>pcapng.lz4</string>
+                <string>pcapng.zst</string>
+            </array>
+            <key>CFBundleTypeIconFile</key>
+            <string>AppIcon</string>
+            <key>LSHandlerRank</key>
+            <string>Alternate</string>
+        </dict>
+        <dict>
+            <key>CFBundleTypeName</key>
+            <string>Network Capture File</string>
+            <key>CFBundleTypeRole</key>
+            <string>Viewer</string>
+            <key>CFBundleTypeExtensions</key>
+            <array>
+                <string>cap</string>
+                <string>cap.gz</string>
+                <string>snoop</string>
+                <string>snoop.gz</string>
+                <string>erf</string>
+                <string>erf.gz</string>
+                <string>5vw</string>
+                <string>5vw.gz</string>
+                <string>rf5</string>
+                <string>rf5.gz</string>
+                <string>bfr</string>
+                <string>bfr.gz</string>
+                <string>pklg</string>
+                <string>pklg.gz</string>
+                <string>ipfix</string>
+                <string>ipfix.gz</string>
+                <string>mplog</string>
+                <string>mplog.gz</string>
+                <string>apc</string>
+                <string>pkt</string>
+                <string>tpc</string>
+                <string>wpz</string>
+                <string>tr1</string>
+            </array>
+            <key>CFBundleTypeIconFile</key>
+            <string>AppIcon</string>
+            <key>LSHandlerRank</key>
+            <string>Alternate</string>
+        </dict>
+    </array>
+</dict>
+</plist>
