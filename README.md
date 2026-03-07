@@ -40,6 +40,12 @@ cp -r "build/Wireshark Launcher.app" /Applications/
 
 Or drag the app to `/Applications` in Finder.
 
+Since the app is not signed, macOS will quarantine it. Remove the quarantine attribute before first launch:
+
+```
+xattr -d com.apple.quarantine "/Applications/Wireshark Launcher.app"
+```
+
 ## Technical Details
 
 - Pure Swift, compiled with `swiftc` — no Xcode project, no dependencies
