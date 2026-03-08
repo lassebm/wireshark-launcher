@@ -22,9 +22,19 @@ This app is that GUI equivalent. Put it in your Dock next to Wireshark and forge
 
 The app icon is the Wireshark shark fin flipped horizontally — just different enough to tell them apart at a glance.
 
-## Build
+## Install from Release
 
-Requires Wireshark installed at `/Applications/Wireshark.app`.
+Download the latest `WiresharkLauncher.zip` from [Releases](../../releases/latest), unzip, and run:
+
+```sh
+./install.sh
+```
+
+This copies the app to `/Applications` and removes the quarantine attribute.
+
+## Build from Source
+
+Requires Wireshark installed at `/Applications/Wireshark.app` for icon generation (falls back to a pre-built icon if unavailable).
 
 ```sh
 ./build.sh
@@ -32,19 +42,11 @@ Requires Wireshark installed at `/Applications/Wireshark.app`.
 
 Produces `build/Wireshark Launcher.app`.
 
-## Install
-
 ```sh
-cp -r "build/Wireshark Launcher.app" /Applications/
+./install.sh
 ```
 
-Or drag the app to `/Applications` in Finder.
-
-Since the app is not signed, macOS will quarantine it. Remove the quarantine attribute before first launch:
-
-```sh
-xattr -d com.apple.quarantine "/Applications/Wireshark Launcher.app"
-```
+Copies the app to `/Applications` and removes the quarantine attribute.
 
 ## Test
 
@@ -58,7 +60,8 @@ Builds the app and validates bundle structure, universal binary, Info.plist corr
 
 - Pure Swift, compiled with `swiftc` — no Xcode project, no dependencies
 - Universal binary (arm64 + x86_64), targeting macOS 12.0+
-- Icon generated at build time from Wireshark's own icon using CoreGraphics
+- Icon generated at build time from Wireshark's own icon using CoreGraphics (pre-built fallback for CI)
+- GitHub Actions builds and releases automatically on every push to `main`
 - Registers as a viewer for pcap, pcapng, and other capture file formats (`LSHandlerRank: Alternate`)
 
 ## Built Entirely by AI

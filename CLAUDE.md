@@ -7,8 +7,11 @@ macOS app that launches a new instance of Wireshark. Clicking the Dock icon open
 - `WiresharkLauncher/AppDelegate.swift` - Main app logic (NSApplicationDelegate). Handles launch and file-open events, invokes `open -n -a /Applications/Wireshark.app`.
 - `WiresharkLauncher/Info.plist` - App bundle metadata. Registers pcap/pcapng/capture file document types with `LSHandlerRank: Alternate`. `LSUIElement` is false (visible in Dock).
 - `generate-icon.swift` - Swift script that reads Wireshark's icon, flips it horizontally, and outputs an `.icns` file. Uses CoreGraphics transforms and `iconutil`.
-- `build.sh` - Build script. Compiles Swift source with `swiftc`, runs icon generation, assembles the `.app` bundle under `build/`.
+- `build.sh` - Build script. Compiles Swift source with `swiftc`, runs icon generation (falls back to `resources/AppIcon.icns` if Wireshark unavailable), assembles the `.app` bundle under `build/`.
+- `install.sh` - Install script. Copies the `.app` bundle to `/Applications` and removes the quarantine attribute.
 - `test.sh` - Test script. Builds the app then validates bundle structure, universal binary, Info.plist, icon, and source invariants.
+- `resources/AppIcon.icns` - Pre-generated app icon for CI builds where Wireshark is not installed.
+- `.github/workflows/build.yml` - GitHub Actions workflow. Builds, tests, and creates a release on every push to `main`.
 
 ## Build
 
@@ -16,12 +19,12 @@ macOS app that launches a new instance of Wireshark. Clicking the Dock icon open
 ./build.sh
 ```
 
-Produces `build/Wireshark Launcher.app`. Requires Wireshark installed at `/Applications/Wireshark.app`.
+Produces `build/Wireshark Launcher.app`. Wireshark at `/Applications/Wireshark.app` is used to generate the icon; if unavailable, falls back to `resources/AppIcon.icns`.
 
 ## Install
 
 ```sh
-cp -r "build/Wireshark Launcher.app" /Applications/
+./install.sh
 ```
 
 ## Tech Notes
