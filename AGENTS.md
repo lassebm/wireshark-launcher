@@ -8,6 +8,7 @@ macOS app that launches a new instance of Wireshark. Clicking the Dock icon open
 - `WiresharkLauncher/Info.plist` - App bundle metadata. Registers pcap/pcapng/capture file document types with `LSHandlerRank: Alternate`. `LSUIElement` is false (visible in Dock).
 - `generate-icon.swift` - Swift script that reads Wireshark's icon, flips it horizontally, and outputs an `.icns` file. Uses CoreGraphics transforms and `iconutil`.
 - `build.sh` - Build script. Compiles Swift source with `swiftc`, runs icon generation, assembles the `.app` bundle under `build/`.
+- `test.sh` - Test script. Builds the app then validates bundle structure, universal binary, Info.plist, icon, and source invariants.
 
 ## Build
 

@@ -46,6 +46,14 @@ Since the app is not signed, macOS will quarantine it. Remove the quarantine att
 xattr -d com.apple.quarantine "/Applications/Wireshark Launcher.app"
 ```
 
+## Test
+
+```sh
+./test.sh
+```
+
+Builds the app and validates bundle structure, universal binary, Info.plist correctness, icon generation, and source invariants.
+
 ## Technical Details
 
 - Pure Swift, compiled with `swiftc` — no Xcode project, no dependencies
