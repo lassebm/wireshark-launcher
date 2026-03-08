@@ -1,0 +1,39 @@
+name: Build and Release
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build
+        run: ./build.sh
+
+      - name: Test
+        run: ./test.sh
+
+      - name: Package release
+        run: |
+          mkdir -p staging
+          cp -r "build/Wireshark Launcher.app" staging/
+          cp install.sh staging/
+          cd staging
+          zip -r ../WiresharkLauncher.zip "Wireshark Launcher.app" install.sh
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: build-${{ github.run_number }}
+          name: Build ${{ github.run_number }}
+          body: |
+            Automated build from commit ${{ github.sha }}.
+
+            **Install:**
+            1. Download and unzip `WiresharkLauncher.zip`
+            2. Run `./install.sh`
+          files: WiresharkLauncher.zip
+          make_latest: true

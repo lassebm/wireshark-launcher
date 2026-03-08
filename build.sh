@@ -13,13 +13,14 @@ rm -rf "$BUILD_DIR"
 mkdir -p "$MACOS" "$RESOURCES"
 
 echo "==> Generating flipped Wireshark icon..."
-swift "$SCRIPT_DIR/generate-icon.swift" "$BUILD_DIR"
-
-if [ -f "$BUILD_DIR/AppIcon.icns" ]; then
+if swift "$SCRIPT_DIR/generate-icon.swift" "$BUILD_DIR" 2>/dev/null && [ -f "$BUILD_DIR/AppIcon.icns" ]; then
 	cp "$BUILD_DIR/AppIcon.icns" "$RESOURCES/AppIcon.icns"
-	echo "    Icon generated successfully."
+	echo "    Icon generated from Wireshark.app."
+elif [ -f "$SCRIPT_DIR/resources/AppIcon.icns" ]; then
+	cp "$SCRIPT_DIR/resources/AppIcon.icns" "$RESOURCES/AppIcon.icns"
+	echo "    Icon copied from resources/ (Wireshark not available)."
 else
-	echo "    WARNING: Icon generation failed, continuing without custom icon."
+	echo "    WARNING: No icon available, continuing without custom icon."
 fi
 
 echo "==> Compiling WiresharkLauncher (universal binary)..."
