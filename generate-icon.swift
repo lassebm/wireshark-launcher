@@ -39,13 +39,18 @@ func generateIcon() {
     // Create iconset directory
     let fileManager = FileManager.default
     try? fileManager.removeItem(atPath: outputIconsetPath)
-    try! fileManager.createDirectory(atPath: outputIconsetPath, withIntermediateDirectories: true)
+    do {
+        try fileManager.createDirectory(atPath: outputIconsetPath, withIntermediateDirectories: true)
+    } catch {
+        print("Error: Could not create iconset directory: \(error)")
+        exit(1)
+    }
 
     for (name, size) in iconSizes {
         let cgSize = CGFloat(size)
 
         // Create bitmap context
-        let bitmapRep = NSBitmapImageRep(
+        guard let bitmapRep = NSBitmapImageRep(
             bitmapDataPlanes: nil,
             pixelsWide: size,
             pixelsHigh: size,
@@ -56,9 +61,15 @@ func generateIcon() {
             colorSpaceName: .deviceRGB,
             bytesPerRow: 0,
             bitsPerPixel: 0
-        )!
+        ) else {
+            print("Error: Could not create bitmap for size \(size)")
+            exit(1)
+        }
 
-        let context = NSGraphicsContext(bitmapImageRep: bitmapRep)!
+        guard let context = NSGraphicsContext(bitmapImageRep: bitmapRep) else {
+            print("Error: Could not create graphics context for size \(size)")
+            exit(1)
+        }
         NSGraphicsContext.current = context
 
         let cgContext = context.cgContext
@@ -77,9 +88,17 @@ func generateIcon() {
         NSGraphicsContext.current = nil
 
         // Save as PNG
-        let pngData = bitmapRep.representation(using: .png, properties: [:])!
+        guard let pngData = bitmapRep.representation(using: NSBitmapImageRep.FileType.png, properties: [:]) else {
+            print("Error: Could not create PNG data for size \(size)")
+            exit(1)
+        }
         let outputPath = "\(outputIconsetPath)/\(name).png"
-        try! pngData.write(to: URL(fileURLWithPath: outputPath))
+        do {
+            try pngData.write(to: URL(fileURLWithPath: outputPath))
+        } catch {
+            print("Error: Could not write PNG to \(outputPath): \(error)")
+            exit(1)
+        }
     }
 
     // Convert iconset to icns using iconutil
@@ -87,8 +106,13 @@ func generateIcon() {
     process.executableURL = URL(fileURLWithPath: "/usr/bin/iconutil")
     process.arguments = ["-c", "icns", outputIconsetPath, "-o", outputIcnsPath]
 
-    try! process.run()
-    process.waitUntilExit()
+    do {
+        try process.run()
+        process.waitUntilExit()
+    } catch {
+        print("Error: Could not run iconutil: \(error)")
+        exit(1)
+    }
 
     if process.terminationStatus == 0 {
         print("Successfully generated \(outputIcnsPath)")

@@ -26,7 +26,7 @@ The app icon is the Wireshark shark fin flipped horizontally — just different 
 
 Requires Wireshark installed at `/Applications/Wireshark.app`.
 
-```
+```sh
 ./build.sh
 ```
 
@@ -34,7 +34,7 @@ Produces `build/Wireshark Launcher.app`.
 
 ## Install
 
-```
+```sh
 cp -r "build/Wireshark Launcher.app" /Applications/
 ```
 
@@ -42,14 +42,14 @@ Or drag the app to `/Applications` in Finder.
 
 Since the app is not signed, macOS will quarantine it. Remove the quarantine attribute before first launch:
 
-```
+```sh
 xattr -d com.apple.quarantine "/Applications/Wireshark Launcher.app"
 ```
 
 ## Technical Details
 
 - Pure Swift, compiled with `swiftc` — no Xcode project, no dependencies
-- Targets `arm64-apple-macos12.0`
+- Universal binary (arm64 + x86_64), targeting macOS 12.0+
 - Icon generated at build time from Wireshark's own icon using CoreGraphics
 - Registers as a viewer for pcap, pcapng, and other capture file formats (`LSHandlerRank: Alternate`)
 

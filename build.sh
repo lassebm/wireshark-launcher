@@ -22,12 +22,25 @@ else
 	echo "    WARNING: Icon generation failed, continuing without custom icon."
 fi
 
-echo "==> Compiling WiresharkLauncher..."
+echo "==> Compiling WiresharkLauncher (universal binary)..."
 swiftc \
-	-o "$MACOS/WiresharkLauncher" \
+	-o "$MACOS/WiresharkLauncher-arm64" \
 	-framework Cocoa \
 	-target arm64-apple-macos12.0 \
 	"$SCRIPT_DIR/WiresharkLauncher/AppDelegate.swift"
+
+swiftc \
+	-o "$MACOS/WiresharkLauncher-x86_64" \
+	-framework Cocoa \
+	-target x86_64-apple-macos12.0 \
+	"$SCRIPT_DIR/WiresharkLauncher/AppDelegate.swift"
+
+lipo -create \
+	"$MACOS/WiresharkLauncher-arm64" \
+	"$MACOS/WiresharkLauncher-x86_64" \
+	-output "$MACOS/WiresharkLauncher"
+
+rm "$MACOS/WiresharkLauncher-arm64" "$MACOS/WiresharkLauncher-x86_64"
 
 echo "==> Copying Info.plist..."
 cp "$SCRIPT_DIR/WiresharkLauncher/Info.plist" "$CONTENTS/Info.plist"

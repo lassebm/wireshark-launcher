@@ -1,4 +1,7 @@
 import Cocoa
+import os
+
+private let logger = Logger(subsystem: "com.local.WiresharkLauncher", category: "main")
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     private var launchedFromFileOpen = false
@@ -12,10 +15,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if !launchedFromFileOpen {
             launchWireshark(withFile: nil)
         }
-        // Terminate after a short delay to ensure the launch completes
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            NSApp.terminate(nil)
-        }
+        NSApp.terminate(nil)
     }
 
     func application(_ sender: NSApplication, openFiles filenames: [String]) {
@@ -24,10 +24,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             launchWireshark(withFile: filename)
         }
         sender.reply(toOpenOrPrint: .success)
-        // Terminate after a short delay to ensure the launches complete
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            NSApp.terminate(nil)
-        }
+        NSApp.terminate(nil)
     }
 
     private func launchWireshark(withFile file: String?) {
@@ -44,8 +41,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         do {
             try process.run()
+            process.waitUntilExit()
         } catch {
-            NSLog("Failed to launch Wireshark: \(error)")
+            logger.error("Failed to launch Wireshark: \(error)")
         }
     }
 }

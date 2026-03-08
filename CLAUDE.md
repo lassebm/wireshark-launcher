@@ -11,7 +11,7 @@ macOS app that launches a new instance of Wireshark. Clicking the Dock icon open
 
 ## Build
 
-```
+```sh
 ./build.sh
 ```
 
@@ -19,13 +19,13 @@ Produces `build/Wireshark Launcher.app`. Requires Wireshark installed at `/Appli
 
 ## Install
 
-```
+```sh
 cp -r "build/Wireshark Launcher.app" /Applications/
 ```
 
 ## Tech Notes
 
 - Swift 6, compiled with `swiftc` (no Xcode project)
-- Targets `arm64-apple-macos12.0`
+- Universal binary (arm64 + x86_64), targeting macOS 12.0+
 - Icon generation uses `NSImage`, `NSBitmapImageRep`, `CGContext`, and `iconutil`
 - The app icon is the Wireshark icon flipped horizontally to distinguish it visually
