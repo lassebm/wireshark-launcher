@@ -11,7 +11,7 @@ macOS app that launches a new instance of Wireshark. Clicking the Dock icon open
 - `install.sh` - Install script. Copies the `.app` bundle to `/Applications` and removes the quarantine attribute.
 - `test.sh` - Test script. Builds the app then validates bundle structure, universal binary, Info.plist, icon, and source invariants.
 - `resources/AppIcon.icns` - Pre-generated app icon for CI builds where Wireshark is not installed.
-- `.github/workflows/build.yml` - GitHub Actions workflow. Builds, tests, and creates a release on every push to `main`.
+- `.github/workflows/build.yml` - GitHub Actions workflow. Builds, tests, and creates a release. Triggered manually via `workflow_dispatch`.
 
 ## Build
 
