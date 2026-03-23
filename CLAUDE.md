@@ -30,6 +30,6 @@ Produces `build/Wireshark Launcher.app`. Wireshark at `/Applications/Wireshark.a
 ## Tech Notes
 
 - Swift 6, compiled with `swiftc` (no Xcode project)
-- Universal binary (arm64 + x86_64), targeting macOS 12.0+
+- Universal binary (arm64 + x86_64), targeting macOS 15.0+
 - Icon generation uses `NSImage`, `NSBitmapImageRep`, `CGContext`, and `iconutil`
 - The app icon is the Wireshark icon flipped horizontally to distinguish it visually

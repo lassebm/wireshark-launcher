@@ -74,7 +74,7 @@ assert_plist "CFBundleIdentifier" "com.local.WiresharkLauncher"
 assert_plist "CFBundleName" "Wireshark Launcher"
 assert_plist "CFBundlePackageType" "APPL"
 assert_plist "CFBundleIconFile" "AppIcon"
-assert_plist "LSMinimumSystemVersion" "12.0"
+assert_plist "LSMinimumSystemVersion" "15.0"
 
 assert "LSUIElement is false" test "$(plist_val LSUIElement)" = "false"
 assert "NSHighResolutionCapable is true" test "$(plist_val NSHighResolutionCapable)" = "true"

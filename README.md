@@ -59,7 +59,7 @@ Builds the app and validates bundle structure, universal binary, Info.plist corr
 ## Technical Details
 
 - Pure Swift, compiled with `swiftc` — no Xcode project, no dependencies
-- Universal binary (arm64 + x86_64), targeting macOS 12.0+
+- Universal binary (arm64 + x86_64), targeting macOS 15.0+
 - Icon generated at build time from Wireshark's own icon using CoreGraphics (pre-built fallback for CI)
 - GitHub Actions builds and releases automatically on every push to `main`
 - Registers as a viewer for pcap, pcapng, and other capture file formats (`LSHandlerRank: Alternate`)

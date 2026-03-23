@@ -27,13 +27,13 @@ echo "==> Compiling WiresharkLauncher (universal binary)..."
 swiftc \
 	-o "$MACOS/WiresharkLauncher-arm64" \
 	-framework Cocoa \
-	-target arm64-apple-macos12.0 \
+	-target arm64-apple-macos15.0 \
 	"$SCRIPT_DIR/WiresharkLauncher/AppDelegate.swift"
 
 swiftc \
 	-o "$MACOS/WiresharkLauncher-x86_64" \
 	-framework Cocoa \
-	-target x86_64-apple-macos12.0 \
+	-target x86_64-apple-macos15.0 \
 	"$SCRIPT_DIR/WiresharkLauncher/AppDelegate.swift"
 
 lipo -create \
