@@ -12,6 +12,10 @@ Wireshark Launcher fixes this with a simple idea: a tiny app that sits in your D
 
 The app launches Wireshark and immediately quits. No background processes, no memory overhead, no windows of its own.
 
+<picture>
+  <img src="resources/how-it-works.svg" alt="Drag a capture file onto the Dock icon or use Open With to launch a new Wireshark instance">
+</picture>
+
 ## Why?
 
 Wireshark is one of the few macOS apps where you routinely need multiple independent instances — comparing captures, monitoring different interfaces, reviewing old files while capturing new ones. macOS makes this surprisingly hard. `open -n` works in the terminal, but there's no GUI equivalent.
